@@ -15,6 +15,13 @@
         <input type="button" value="Search" onclick="find();" />
         <p id="product" />
     </div>
+    <div>
+        <h2>Search by Name</h2>
+        <input type="text" id="prodName" size="10" />
+        <input type="button" value="Search" onclick="findProdByName();" />
+        <ul id="productsByName" />
+     
+    </div>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script>
@@ -37,6 +44,7 @@
     }
 
     function find() {
+        
       var id = $('#prodId').val();
       $.getJSON(uri + '/' + id)
           .done(function (data) {
@@ -45,6 +53,28 @@
           .fail(function (jqXHR, textStatus, err) {
             $('#product').text('Error: ' + err);
           });
+    }
+
+    function findProdByName() {
+        var uri = 'api/productsSearch';
+       
+        var name = $('#prodName').val();
+        window.console && console.log(uri + '/' + name);
+        $.getJSON(uri + '/' + name)
+            .done(function (data) {
+                $('#productsByName li').remove();
+                window.console && console.log(JSON.stringify(data));
+                // $('#productsByName').text(formatItem(data));
+                 //On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                    //    // Add a list item for the product.
+                    $('<li>', { text: formatItem(item) }).appendTo($('#productsByName'));
+                });
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                window.console && console.log('error');
+                $('#productsByName').text('Error: ' + err);
+            });
     }
     </script>
 </body>
