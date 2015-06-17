@@ -60,7 +60,7 @@
        
         var name = $('#prodName').val();
         window.console && console.log(uri + '/' + name);
-        $.getJSON(uri + '/' + name)
+        $.getJSON(encodeURI(uri + '/' + name))
             .done(function (data) {
                 $('#productsByName li').remove();
                 window.console && console.log(JSON.stringify(data));
