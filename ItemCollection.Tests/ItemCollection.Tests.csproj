@@ -122,12 +122,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ItemCollection\ItemCollection.csproj">
-      <Project>{7D5F415E-51A7-49AD-84EE-58593C94D5B6}</Project>
-      <Name>ItemCollection</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
